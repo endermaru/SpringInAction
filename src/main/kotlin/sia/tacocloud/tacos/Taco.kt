@@ -6,9 +6,12 @@ import jakarta.validation.constraints.Size
 import java.util.*
 import jakarta.persistence.Entity
 import jakarta.persistence.*
+import org.springframework.data.rest.core.annotation.RestResource
+import java.io.Serializable
 
 @Table
 @Entity
+@RestResource(rel="tacos", path="tacos")
 class Taco(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,7 +28,7 @@ class Taco(
     @field:NotEmpty(message = "You must choose at least 1 ingredient")
     @ManyToMany()
     var ingredients: MutableList<Ingredient> = mutableListOf(),
-) {
+) : Serializable {
     fun addIngredient(ingredient: Ingredient) {
         ingredients.add(ingredient)
     }

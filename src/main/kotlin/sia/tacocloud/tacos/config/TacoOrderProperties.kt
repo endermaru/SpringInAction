@@ -13,5 +13,5 @@ import org.springframework.validation.annotation.Validated
 data class TacoOrderProperties(
     @param:Min(value=5, message="must be between 5 and 25")
     @param:Max(value=5, message="must be between 5 and 25")
-    val pageSize:Int = 20,
+    var pageSize:Int = 20,
 )

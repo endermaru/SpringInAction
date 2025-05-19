@@ -48,6 +48,15 @@ dependencies {
 	//OAuth2
 	implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
 
+	// Spring Data REST
+	implementation("org.springframework.boot:spring-boot-starter-data-rest")
+
+	// Resource Server
+	implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
+
+	// JMS broker
+	implementation("org.springframework.boot:spring-boot-starter-artemis")
+
 }
 
 kotlin {
