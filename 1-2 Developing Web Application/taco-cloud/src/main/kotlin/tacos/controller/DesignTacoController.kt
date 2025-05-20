@@ -1,9 +1,11 @@
 package tacos.controller
 
 //import lombok.extern.slf4j.Slf4j
+import jakarta.validation.Valid
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
+import org.springframework.validation.Errors
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PostMapping
@@ -81,9 +83,14 @@ class DesignTacoController {
 
     @PostMapping
     fun processTaco(
-        taco: Taco,
+        @ModelAttribute @Valid taco:Taco,
+        errors: Errors,
         @ModelAttribute tacoOrder: TacoOrder
     ): String {
+        if (errors.hasErrors()) {
+            log.info(errors.toString())
+            return "design";
+        }
         tacoOrder.addTaco(taco)
         log.info("Processing taco: $taco")
         return "redirect:/orders/current"
