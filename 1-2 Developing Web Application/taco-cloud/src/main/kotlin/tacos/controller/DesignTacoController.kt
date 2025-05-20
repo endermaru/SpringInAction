@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.SessionAttributes
 
@@ -76,6 +77,16 @@ class DesignTacoController {
 
     private fun filterByType(ingredients: List<Ingredient>, type: Type): List<Ingredient> {
         return ingredients.filter { it.type == type }
+    }
+
+    @PostMapping
+    fun processTaco(
+        taco: Taco,
+        @ModelAttribute tacoOrder: TacoOrder
+    ): String {
+        tacoOrder.addTaco(taco)
+        log.info("Processing taco: $taco")
+        return "redirect:/orders/current"
     }
 
 }
