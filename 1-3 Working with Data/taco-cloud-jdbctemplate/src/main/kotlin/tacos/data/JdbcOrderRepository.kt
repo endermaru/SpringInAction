@@ -94,7 +94,7 @@ class JdbcOrderRepository (
             ?: throw RuntimeException("Failed to retrieve generated ID")
         taco.id = tacoId
         // 재료의 ID를 저장
-        saveIngredientRefs(tacoId, taco.ingredients.map { IngredientRef(it.id) })
+        saveIngredientRefs(tacoId, taco.ingredients)
         return tacoId
     }
 

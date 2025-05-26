@@ -14,5 +14,5 @@ data class Taco(
     var name: String = "",
 
     @field:NotEmpty(message = "You must choose at least 1 ingredient")
-    var ingredients: MutableList<Ingredient> = mutableListOf(),
+    var ingredients: MutableList<IngredientRef> = mutableListOf(),
 )
