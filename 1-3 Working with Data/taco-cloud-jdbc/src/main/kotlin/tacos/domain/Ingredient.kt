@@ -1,6 +1,8 @@
 package tacos.domain
 
 import org.springframework.data.annotation.Id
+import org.springframework.data.domain.Persistable
+import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
 
 @Table
@@ -13,10 +15,16 @@ import org.springframework.data.relational.core.mapping.Table
 //  역시 Kotlin의 data class는 필요 없음
 data class Ingredient(
     @Id
-    var id: String = "",
+    @Column("ID")
+    var _id: String = "",
     var name: String = "",
-    var type: Type = Type.WRAP,
-) {
+    var type: Type = Type.WRAP
+) : Persistable<String> {
+
+    override fun getId(): String = _id
+
+    override fun isNew(): Boolean = true
+
     enum class Type {
         WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE
     }

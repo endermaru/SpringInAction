@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.SessionAttributes
+import tacos.data.IngredientRepository
 
 import tacos.domain.Ingredient
 import tacos.domain.Ingredient.Type
@@ -21,7 +22,9 @@ import tacos.domain.TacoOrder
 @Controller
 @RequestMapping("/design")
 @SessionAttributes("tacoOrder")
-class DesignTacoController {
+class DesignTacoController(
+    private val ingredientRepository: IngredientRepository,
+) {
 
     // Kotlin 방식의 정적인 log 방식
     companion object {
@@ -30,21 +33,8 @@ class DesignTacoController {
 
     @ModelAttribute
     fun addIngredientsToModel(model: Model) {
-        val ingredients = listOf<Ingredient>(
-            Ingredient("FLTO", "Flour Tortilla", Type.WRAP),
-            Ingredient("COTO", "Corn Tortilla", Type.WRAP),
-            Ingredient("GRBF", "Ground Beef", Type.PROTEIN),
-            Ingredient("CARN", "Carnitas", Type.PROTEIN),
-            Ingredient("TMTO", "Diced Tomatoes", Type.VEGGIES),
-            Ingredient("LETC", "Lettuce", Type.VEGGIES),
-            Ingredient("CHED", "Cheddar", Type.CHEESE),
-            Ingredient("JACK", "Monterrey Jack", Type.CHEESE),
-            Ingredient("SLSA", "Salsa", Type.SAUCE),
-            Ingredient("SRCR", "Sour Cream", Type.SAUCE)
-        )
-
-        // Type을 모두 가져옴 - WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE
-        val types: List<Type> = Ingredient.Type.entries
+        val ingredients: List<Ingredient> = ingredientRepository.findAll().toList()
+        val types: List<Type> = ingredients.map { it.type }
 
         // Type 별로
         for (type in types) {

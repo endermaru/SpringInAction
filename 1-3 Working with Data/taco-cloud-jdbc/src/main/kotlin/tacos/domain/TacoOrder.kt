@@ -11,12 +11,12 @@ import org.springframework.data.relational.core.mapping.Table
 import java.io.Serializable
 import java.util.Date
 
-@Table("Taco_Order")
+@Table("TACO_ORDER")
 data class TacoOrder(
     @Id
     var id: Long = 0,
     var placedAt: Date = Date(),
-    @Column("delivery_name") // optional
+    @Column("DELIVERY_NAME") // optional
     @field: NotBlank(message="Delivery name is required")
     var deliveryName: String = "",
     @field: NotBlank(message="Delivery Street is required")
