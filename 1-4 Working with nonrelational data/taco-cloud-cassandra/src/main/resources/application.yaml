@@ -1,0 +1,12 @@
+spring:
+
+  application:
+    name: taco-cloud
+
+  cassandra:
+    keyspace-name: tacocloud
+    schema-action: recreate
+    local-datacenter: datacenter1
+
+  thymeleaf:
+    cache: false
