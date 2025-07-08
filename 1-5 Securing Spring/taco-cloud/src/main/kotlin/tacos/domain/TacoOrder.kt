@@ -3,6 +3,8 @@ package tacos.domain
 import jakarta.persistence.CascadeType
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
@@ -18,6 +20,7 @@ import java.util.Date
 @Table(name="taco_order")
 class TacoOrder(
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Long = 0,
     var placedAt: Date = Date(),
     @Column(name = "DELIVERY_NAME") // optional
