@@ -15,13 +15,12 @@ import org.springframework.data.relational.core.mapping.Table
 //  역시 Kotlin의 data class는 필요 없음
 data class Ingredient(
     @Id
-    @Column("ID")
-    var _id: String = "",
+    private var id: String = "",
     var name: String = "",
     var type: Type = Type.WRAP
 ) : Persistable<String> {
 
-    override fun getId(): String = _id
+    override fun getId(): String = id
 
     override fun isNew(): Boolean = true
 
