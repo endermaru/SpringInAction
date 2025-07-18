@@ -41,7 +41,7 @@ class CustomOAuth2UserService(
             // 회원가입 (새 사용자 저장)
             user = User(
                 username = email,
-                password = BCryptPasswordEncoder().encode(email.reversed()),
+                password = passwordEncoder.encode(email.reversed()),
                 fullname = name,
             )
             userRepository.save(user)
