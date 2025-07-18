@@ -9,5 +9,9 @@
         <a th:href="@{/design}">
             <img th:src="@{/images/TacoCloud.png}"/>
         </a>
+        <form method="POST" th:action="@{/logout}">
+            <input type="submit" value="Logout"/>
+            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+        </form>
     </body>
 </html>
