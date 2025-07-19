@@ -3,6 +3,7 @@ package tacos.security
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.User
@@ -15,6 +16,7 @@ import org.springframework.security.web.SecurityFilterChain
 import tacos.data.UserRepository
 
 @Configuration
+@EnableMethodSecurity
 class SecurityConfig(
     private val userRepository: UserRepository,
     private val customOAuth2UserService: CustomOAuth2UserService,

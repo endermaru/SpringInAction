@@ -14,7 +14,7 @@ class AdminService(
     @Transactional
     @PreAuthorize("hasRole('ADMIN')")
     fun deleteAllOrders() {
-        orderRepository.deleteAll();
+        orderRepository.deleteAll()
     }
 
     @Transactional
