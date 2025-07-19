@@ -2,6 +2,7 @@ package tacos.controller
 
 import jakarta.validation.Valid
 import org.slf4j.LoggerFactory
+import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.stereotype.Controller
 import org.springframework.validation.Errors
 import org.springframework.web.bind.annotation.GetMapping
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.SessionAttributes
 import org.springframework.web.bind.support.SessionStatus
 import tacos.data.OrderRepository
 import tacos.domain.TacoOrder
+import tacos.domain.User
 
 @Controller
 @RequestMapping("/orders")
@@ -34,13 +36,17 @@ class OrderController(
     fun processOrder(
         @Valid order: TacoOrder,
         errors: Errors,
-        sessionStatus: SessionStatus
+        sessionStatus: SessionStatus,
+        @AuthenticationPrincipal user: User,  // Authentication을 통해 접근한 User 엔티티
     ): String {
         if (errors.hasErrors()) {
             log.info(errors.toString())
             return "orderForm";
         }
         log.info("Order submitted: {}", order)
+
+        order.user = user
+
         orderRepository.save(order)
         sessionStatus.setComplete()
         return "redirect:/"

@@ -6,6 +6,7 @@ import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import jakarta.persistence.ManyToOne
 import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
 import jakarta.validation.constraints.Digits
@@ -44,7 +45,10 @@ class TacoOrder(
     var ccCVV: String = "",
     // 일대다, 부모 엔티티에 수행한 작업을 자식에게 자동으로 전파(save 등)
     @OneToMany(cascade = [(CascadeType.ALL)])
-    var tacos: MutableList<Taco> = mutableListOf()
+    var tacos: MutableList<Taco> = mutableListOf(),
+    // 다대일 - 사용자 한 명이 여러 주문 가능
+    @ManyToOne
+    var user: User? = null, // Model의 기본값(null)
 ) {
     fun addTaco(taco: Taco) {
         tacos.add(taco)
