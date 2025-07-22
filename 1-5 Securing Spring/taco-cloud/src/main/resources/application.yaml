@@ -31,3 +31,6 @@ spring:
     defer-datasource-initialization: true
     hibernate:
       ddl-auto: update
+
+custom:
+  admin-password: ${ADMIN_PASSWORD}

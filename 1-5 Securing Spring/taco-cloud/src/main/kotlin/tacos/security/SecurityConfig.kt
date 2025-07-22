@@ -65,12 +65,13 @@ class SecurityConfig(
                 auth
                     .requestMatchers("/design", "/orders").hasRole("USER")
                     // .requestMatchers(HttpMethod.POST, "/admin/**").hasRole("ADMIN")
+                    .requestMatchers("/admin").hasRole("ADMIN")
                     .requestMatchers("/", "/**").permitAll()
             }
             .formLogin { login ->
                 login
                     .loginPage("/login") // 커스텀 로그인 페이지 설정 가능
-                    .defaultSuccessUrl("/design", true) // 로그인 성공 시 이동할 페이지(강제 리디렉트)
+                    .defaultSuccessUrl("/", true) // 로그인 성공 시 이동할 페이지(강제 리디렉트)
             }
             .oauth2Login { login ->
                 login

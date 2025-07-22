@@ -24,11 +24,14 @@ class User(
     private val state: String = "",
     private val zip: String = "",
     private val phoneNumber: String = "",
+    private val role: Collection<SimpleGrantedAuthority> = listOf(
+        SimpleGrantedAuthority("ROLE_USER"),
+    )
 
     ): UserDetails {
 
     override fun getAuthorities(): Collection<GrantedAuthority> {
-        return listOf(SimpleGrantedAuthority("ROLE_USER"))
+        return role
     }
 
     override fun getPassword(): String = password

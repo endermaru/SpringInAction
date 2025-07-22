@@ -9,13 +9,17 @@
         <a th:href="@{/design}">
             <img th:src="@{/images/TacoCloud.png}"/>
         </a>
-        <form method="POST" th:action="@{/logout}">
-            <input type="submit" value="Logout"/>
-            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
-        </form>
-        <form method="POST" th:action="@{/admin/deleteOrders}">
-            <input type="submit" value="모든 주문 삭제 (ADMIN)"/>
-            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
-        </form>
+        <div sec:authorize="isAuthenticated()">
+            Hello, <b sec:authentication="name">User</b>!
+            <form method="POST" th:action="@{/logout}" style="display: inline;">
+                <input type="submit" value="Logout"/>
+                <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+            </form>
+        </div>
+
+        <div sec:authorize="isAnonymous()">
+            <a th:href="@{/login}">Login</a>
+        </div>
+        <a th:href="@{/admin}">Move to Admin Page</a>
     </body>
 </html>

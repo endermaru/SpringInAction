@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Taco Cloud Admin</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<h1>Admin Page</h1>
+
+<hr/>
+
+<form method="POST" th:action="@{/admin/deleteOrders}" onsubmit="return confirm('This Action ir IRREVERSIBLE!!');">
+    <h3>Delete All Orders</h3>
+    <p style="color: red;"><strong>Warning: </strong>This button permanently deletes all users' order records from the database.</p>
+
+    <input type="submit" value="DELETE ALL ORDERS"/>
+
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+</form>
+
+<hr/>
+
+<a th:href="@{/}">Return to Home</a>
+
+</body>
+</html>
